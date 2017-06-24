@@ -1,8 +1,31 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import App from './App';
-import registerServiceWorker from './registerServiceWorker';
-import './index.css';
+import React from 'react'
+import { render } from 'react-dom'
+import { ConnectedRouter } from 'react-router-redux'
+import { ApolloProvider } from 'react-apollo';
+import App from './components/App'
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
+import store, { history } from './store'
+import { client } from './reducers'
+import injectTapEventPlugin from 'react-tap-event-plugin'
+import registerServiceWorker from './registerServiceWorker'
+import './styles/index.css'
 
-ReactDOM.render(<App />, document.getElementById('root'));
+// this is just optional,
+// used by mui for touch devices
+injectTapEventPlugin();
+
+
+const target = document.querySelector('#root')
+
+render(
+  <ApolloProvider store={store} client={client}>
+    <ConnectedRouter history={history}>
+        <MuiThemeProvider>
+          <App/>
+        </MuiThemeProvider>
+    </ConnectedRouter>
+  </ApolloProvider>,
+  target
+)
+
 registerServiceWorker();
