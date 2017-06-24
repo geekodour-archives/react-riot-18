@@ -1,12 +1,13 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
+import logo from '../logo.svg' 
 
 const NavBar = props => (
-  <nav className="nav has-shadow">
+  <nav className="nav" style={{backgroundColor:'#87c8f4'}}>
     <div className="container">
       <div className="nav-left">
         <Link to="/" className="nav-item">
-          <h1 className="title is-2">MarkMyMind</h1>
+          <img src={logo} alt="poop"/>
         </Link>
         <Link className="nav-item is-tab is-hidden-mobile" to="/">Home</Link>
       </div>
