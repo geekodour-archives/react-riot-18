@@ -6,9 +6,6 @@ import { connect } from 'react-redux'
 import * as uiActions from '../actions/uiActions'
 import { GET_LIST } from '../queries'
 
-import FlatButton from 'material-ui/FlatButton'
-import {Card, CardActions, CardHeader, CardText} from 'material-ui/Card'
-
 import Editor from './Editor'
 import GraphContainer from './GraphContainer'
 

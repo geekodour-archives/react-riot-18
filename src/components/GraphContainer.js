@@ -1,7 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 
-import {Card, CardActions, CardHeader, CardText} from 'material-ui/Card'
+import {Card, CardHeader, CardText} from 'material-ui/Card'
 
 const GraphContainer = props => (
   <Card>
