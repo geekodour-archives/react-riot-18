@@ -1,7 +1,8 @@
 import { PARSE_MD } from '../constants/actionTypes'
 
 const initialState = {
-        mdText : ''
+        mdText : '',
+        graph: {}
 };
 
 
@@ -12,7 +13,8 @@ export default function graphReducer(state = initialState, action) {
     case PARSE_MD:
           return {
             ...state,
-            mdText: action.payload
+            mdText: action.mdText,
+            graph: action.graph
           }
 
     default:

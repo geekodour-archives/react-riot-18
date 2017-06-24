@@ -1,7 +1,8 @@
 import React from 'react'
 import { connect } from 'react-redux'
+import MindMap from 'react-mindmap'
 
-import {Card, CardActions, CardHeader, CardText} from 'material-ui/Card'
+import {Card, CardHeader, CardText} from 'material-ui/Card'
 
 const GraphContainer = props => (
   <Card>
@@ -9,6 +10,11 @@ const GraphContainer = props => (
       <CardText>
         stuff
         <p>{props.graph.mdText}</p>
+        <pre>{JSON.stringify(props.graph.graph)}</pre>
+        <MindMap
+        nodes={props.graph.graph.nodes}
+        connections={props.graph.graph.edges}
+        />
       </CardText>
   </Card>
 )

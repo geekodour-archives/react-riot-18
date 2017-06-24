@@ -1,5 +1,7 @@
 import * as types from '../constants/actionTypes';
+import {genGraph} from '../utils'
 
 export function parseMd(mdText) {
-  return { type: types.PARSE_MD, payload: mdText };
+  let graph = genGraph(mdText);
+  return { type: types.PARSE_MD, mdText: mdText, graph: graph  };
 }
