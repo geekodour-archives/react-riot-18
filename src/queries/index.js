@@ -1,9 +1,18 @@
 import gql from 'graphql-tag'
 
 export const GET_LIST = gql`query allQuestions {
-  allQuestions(orderBy: createdAt_DESC) {
+  allMindmaps(orderBy: createdAt_DESC) {
     id
-    title
-    description
+    name
+    graph
   }
 }`;
+
+
+export const USER_QUERY = gql`
+  query {
+    user {
+      id
+    }
+  }
+`;

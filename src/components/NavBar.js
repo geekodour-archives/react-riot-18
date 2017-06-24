@@ -2,6 +2,7 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import MediaQuery from 'react-responsive'
 import logo from '../logo.svg'
+import LoginAuth0 from './LoginAuth0.js'
 
 import AppBar from 'material-ui/AppBar'
 import Paper from 'material-ui/Paper'
@@ -14,6 +15,10 @@ const style = {
   paddingLeft: '15px',
   paddingRight: '15px'
 };
+
+const _logout = () => {
+window.localStorage.removeItem('auth0IdToken')
+}
 
 const NavBar = props => (
   <div className="">
@@ -37,7 +42,8 @@ const NavBar = props => (
           <span></span>
         </span>
         <div className="nav-right nav-menu">
-          <a className="nav-item is-tab">Log out</a>
+          <a className="nav-item is-tab" onClick={()=>(_logout())}>Log out</a>
+          <LoginAuth0/>
         </div>
       </div>
     </nav>
