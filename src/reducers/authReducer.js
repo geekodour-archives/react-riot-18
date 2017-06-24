@@ -6,7 +6,6 @@ const initialState = {
 
 
 export default function authReducer(state = initialState, action) {
-  let newState;
 
   switch (action.type) {
     default:

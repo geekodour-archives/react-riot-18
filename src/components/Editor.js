@@ -2,6 +2,7 @@ import React from 'react'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import * as graphActions from '../actions/graphActions'
+import * as uiActions from '../actions/uiActions'
 
 import {Card, CardActions, CardHeader, CardText} from 'material-ui/Card'
 import TextField from 'material-ui/TextField'
@@ -21,8 +22,16 @@ const Editor = props => (
       </CardText>
       <CardActions>
         <p>{JSON.stringify(props.auth)}</p>
-        <RaisedButton label="save" backgroundColor='#494949' labelColor='#FFF'/>
-        <RaisedButton label="share"/>
+        <RaisedButton
+          label="save"
+          onTouchTap={props.uiActions.toggleSaveDialog}
+          backgroundColor='#494949'
+          labelColor='#FFF'/>
+        <RaisedButton
+          label="share"
+          onTouchTap={props.uiActions.toggleShareDialog}
+          backgroundColor='#494949'
+          labelColor='#FFF'/>
       </CardActions>
     </Card>
 )
@@ -30,7 +39,8 @@ const Editor = props => (
 const mapStateToProps = state => ({ auth: state.auth });
 const mapDispatchToProps = dispatch => (
   {
-    graphActions: bindActionCreators(graphActions, dispatch)
+    graphActions: bindActionCreators(graphActions, dispatch),
+    uiActions: bindActionCreators(uiActions, dispatch)
   }
 );
 

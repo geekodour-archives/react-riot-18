@@ -8,9 +8,23 @@ import { GET_LIST } from '../queries'
 
 import Editor from './Editor'
 import GraphContainer from './GraphContainer'
+import SaveDialog from './SaveDialog'
+import ShareDialog from './ShareDialog'
+import Dock from './Dock'
 
 const Home = props => (
   <section className="section">
+    <SaveDialog
+      saveDialogOpen={props.ui.saveDialogOpen}
+      toggleSaveDialog={props.uiActions.toggleSaveDialog} />
+    <ShareDialog
+      shareDialogOpen={props.ui.shareDialogOpen}
+      toggleShareDialog={props.uiActions.toggleShareDialog} />
+    <Dock
+      dockOpen={props.ui.dockOpen}
+      toggleDock={props.uiActions.toggleDock}
+    />
+
     <div className="container is-fluid">
       <div className="columns">
         <div className="column is-one-quarter">

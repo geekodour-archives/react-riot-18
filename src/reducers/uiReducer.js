@@ -1,25 +1,35 @@
-import { DIM_TOGGLE } from '../constants/actionTypes'
+import { DIM_TOGGLE, TOGGLE_DOCK, TOGGLE_SAVE_DIALOG, TOGGLE_SHARE_DIALOG } from '../constants/actionTypes'
 
 const initialState = {
-        dimToggle : false
+        dimToggle : false,
+        saveDialogOpen: false,
+        shareDialogOpen: false,
+        dockOpen: false
 };
 
 
 export default function uiReducer(state = initialState, action) {
-  let newState;
-
   switch (action.type) {
     case DIM_TOGGLE:
           return {
             ...state,
             dimToggle: !state.dimToggle
           }
-
-    case 'DO_NOTHING':
-      newState = { ...state };
-      // do something with the newstate
-      return newState;
-
+    case TOGGLE_SAVE_DIALOG:
+          return {
+            ...state,
+            saveDialogOpen: !state.saveDialogOpen
+          }
+    case TOGGLE_SHARE_DIALOG:
+          return {
+            ...state,
+            shareDialogOpen: !state.shareDialogOpen
+          }
+    case TOGGLE_DOCK:
+          return {
+            ...state,
+            dockOpen: !state.dockOpen
+          }
     default:
       return state;
   }

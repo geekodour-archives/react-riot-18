@@ -6,6 +6,7 @@ import logo from '../logo.svg'
 import AppBar from 'material-ui/AppBar'
 import Paper from 'material-ui/Paper'
 import TextField from 'material-ui/TextField'
+import RaisedButton from 'material-ui/RaisedButton'
 
 const style = {
   textAlign: 'center',
@@ -46,6 +47,10 @@ const NavBar = props => (
            <a className="nav-item">
               <Paper style={style} zDepth={1}>
                 <TextField hintText="search" />
+                  <RaisedButton
+                    label="Open Drawer"
+                    onTouchTap={props.toggleDock}
+                  />
 		      </Paper>
            </a>
         </div>
@@ -54,6 +59,5 @@ const NavBar = props => (
   </MediaQuery>
   </div>
 )
-
 
 export default NavBar
