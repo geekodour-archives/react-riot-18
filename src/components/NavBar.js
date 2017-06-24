@@ -10,6 +10,8 @@ import TextField from 'material-ui/TextField'
 const style = {
   textAlign: 'center',
   display: 'inline-block',
+  paddingLeft: '15px',
+  paddingRight: '15px'
 };
 
 const NavBar = props => (
@@ -43,7 +45,7 @@ const NavBar = props => (
         <div className="nav-right">
            <a className="nav-item">
               <Paper style={style} zDepth={1}>
-                <TextField hintText="Hint Text" />
+                <TextField hintText="search" />
 		      </Paper>
            </a>
         </div>
