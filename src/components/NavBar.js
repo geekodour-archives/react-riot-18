@@ -7,9 +7,8 @@ const NavBar = props => (
     <div className="container">
       <div className="nav-left">
         <Link to="/" className="nav-item">
-          <img src={logo} alt="poop"/>
+          <img src={logo} alt="poop" className="logomark"/>
         </Link>
-        <Link className="nav-item is-tab is-hidden-mobile" to="/">Home</Link>
       </div>
       <span className="nav-toggle">
         <span></span>

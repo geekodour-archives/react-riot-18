@@ -10,7 +10,7 @@
     "react": "^15.6.1",
     "react-apollo": "1.4.2",
     "react-dom": "^15.6.1",
-    "react-mindmap": "2.0.6",
+    "react-mindmap": "^2.0.6",
     "react-redux": "5.0.5",
     "react-router-dom": "4.1.1",
     "react-router-redux": "5.0.0-alpha.6",
