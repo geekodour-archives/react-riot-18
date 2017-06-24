@@ -13,7 +13,7 @@ export const genGraph = src => {
         let currentNode = { name : token.text, depth : token.depth };
 
         // add to the nodes array
-        d3Graph.nodes.push({id:currentNode.name,tokens:[]})
+        d3Graph.nodes.push({id:currentNode.name,text:currentNode.name,tokens:[]})
 
         if (currentNode.depth > headNode.depth) {
 
@@ -28,7 +28,7 @@ export const genGraph = src => {
 
           // add to the edges array
           if(headNode.head.parent){
-            d3Graph.edges.push({target:currentNode.name,source:headNode.head.parent.name})
+            d3Graph.edges.push({target:currentNode.name,source:headNode.head.parent.name,curve:{}})
           }
         }
         else {
@@ -40,7 +40,7 @@ export const genGraph = src => {
 
           // add to the edges array
           if(headNode.head.parent){
-            d3Graph.edges.push({target:currentNode.name,source:headNode.head.parent.name})
+            d3Graph.edges.push({target:currentNode.name,source:headNode.head.parent.name,curve:{}})
           }
 
           currentNode = Object.assign(currentNode,{parent:headNode.head.parent});
