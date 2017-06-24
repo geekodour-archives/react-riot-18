@@ -3518,3 +3518,6 @@ section.section {
 
 .logomark {
   height: 80px; }
+
+card {
+  border-radius: 12px; }

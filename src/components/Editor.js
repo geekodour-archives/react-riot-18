@@ -5,7 +5,7 @@ import * as graphActions from '../actions/graphActions'
 
 import {Card, CardActions, CardHeader, CardText} from 'material-ui/Card'
 import TextField from 'material-ui/TextField'
-import FlatButton from 'material-ui/FlatButton'
+import RaisedButton from 'material-ui/RaisedButton'
 
 const Editor = props => (
   <Card>
@@ -20,10 +20,10 @@ const Editor = props => (
         />
       </CardText>
       <CardActions>
-        <FlatButton label="save" />
-        <FlatButton label="share" />
+        <RaisedButton label="save" backgroundColor='#494949' labelColor='#FFF'/>
+        <RaisedButton label="share"/>
       </CardActions>
-  </Card>
+    </Card>
 )
 
 const mapDispatchToProps = dispatch => (
