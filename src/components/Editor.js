@@ -20,16 +20,18 @@ const Editor = props => (
         />
       </CardText>
       <CardActions>
+        <p>{JSON.stringify(props.auth)}</p>
         <RaisedButton label="save" backgroundColor='#494949' labelColor='#FFF'/>
         <RaisedButton label="share"/>
       </CardActions>
     </Card>
 )
 
+const mapStateToProps = state => ({ auth: state.auth });
 const mapDispatchToProps = dispatch => (
   {
     graphActions: bindActionCreators(graphActions, dispatch)
   }
 );
 
-export default connect( null, mapDispatchToProps)(Editor)
+export default connect( mapStateToProps, mapDispatchToProps)(Editor)

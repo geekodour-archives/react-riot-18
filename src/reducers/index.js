@@ -5,6 +5,7 @@ import { ApolloClient, createNetworkInterface } from 'react-apollo'
 // import reducers
 import ui from './uiReducer'
 import graph from './graphReducer'
+import auth from './authReducer'
 
 
 // setup apollo redux client
@@ -14,6 +15,7 @@ export const client = new ApolloClient({ networkInterface });
 export default combineReducers({
   ui,
   graph,
+  auth,
   routing: routerReducer,
   apollo: client.reducer()
 })
