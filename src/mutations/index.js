@@ -5,3 +5,11 @@ export const CREATE_USER = gql`mutation ($idToken: String!){
       id
     }
 }`
+
+export const CREATE_MINDMAP = gql`
+  mutation createMindmap($name: String!, $graph: Json!) {
+    createMindmap(name: $name, graph: $graph) {
+      id
+    }
+  }
+`

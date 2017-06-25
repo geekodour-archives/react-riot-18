@@ -4,7 +4,7 @@ import { graphql } from 'react-apollo'
 import { connect } from 'react-redux'
 
 import * as uiActions from '../actions/uiActions'
-import { GET_LIST } from '../queries'
+import { GET_LIST, USER_QUERY } from '../queries'
 
 import Editor from './Editor'
 import GraphContainer from './GraphContainer'
@@ -14,13 +14,17 @@ import Dock from './Dock'
 
 const Home = props => (
   <section className="section">
+    <p>{JSON.stringify(props.data)}</p>
     <SaveDialog
+      userInfo={props.data.user}
       saveDialogOpen={props.ui.saveDialogOpen}
       toggleSaveDialog={props.uiActions.toggleSaveDialog} />
     <ShareDialog
+      userInfo={props.data.user}
       shareDialogOpen={props.ui.shareDialogOpen}
       toggleShareDialog={props.uiActions.toggleShareDialog} />
     <Dock
+      userInfo={props.data.user}
       dockOpen={props.ui.dockOpen}
       toggleDock={props.uiActions.toggleDock}
     />
@@ -38,7 +42,8 @@ const Home = props => (
   </section>
 )
 
-const HomeWithGQLData = graphql(GET_LIST)(Home)
+const HomeWithGQLData = graphql(GET_LIST,{name: 'getMindMaps'})(Home)
+const HomeWithUserData = graphql(USER_QUERY,{ options: { fetchPolicy: 'network-only' } })(HomeWithGQLData)
 
 const mapStateToProps = state => ( { ui: state.ui });
 
@@ -48,4 +53,4 @@ const mapDispatchToProps = dispatch => (
   }
 );
 
-export default connect( mapStateToProps, mapDispatchToProps)(HomeWithGQLData)
+export default connect( mapStateToProps, mapDispatchToProps)(HomeWithUserData)

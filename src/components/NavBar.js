@@ -39,6 +39,9 @@ const NavBar = props => (
         </span>
         <div className="nav-right nav-menu">
           <LoginAuth0/>
+          {props.userInfo
+           ?<a className="nav-item is-tab">MyMaps</a>
+           :<p/>}
         </div>
       </div>
     </nav>

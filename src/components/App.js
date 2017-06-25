@@ -18,16 +18,16 @@ const App = props => (
   <Router>
   <div>
     <NavBar
+      userInfo={props.data.user}
       dockOpen={props.ui.dockOpen}
       toggleDock={props.uiActions.toggleDock} />
-    <p style={{color:'#FFF'}}>{JSON.stringify(props.data)}</p>
     <Route exact path="/" component={Home} />
   </div>
   </Router>
 )
 
 // needed for proper check on user auth
-//const AppWithGQLData = graphql(USER_QUERY,{ options: { fetchPolicy: 'network-only' } })(App)
+const AppWithGQLData = graphql(USER_QUERY,{ options: { fetchPolicy: 'network-only' } })(App)
 
 const mapStateToProps = state => ( { ui: state.ui });
 
@@ -37,8 +37,8 @@ const mapDispatchToProps = dispatch => (
   }
 );
 
-//export default connect( mapStateToProps, mapDispatchToProps)(AppWithGQLData)
-export default connect( mapStateToProps, mapDispatchToProps)(App)
+export default connect( mapStateToProps, mapDispatchToProps)(AppWithGQLData)
+//export default connect( mapStateToProps, mapDispatchToProps)(App)
 
 
 //export default App;
