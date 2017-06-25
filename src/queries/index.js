@@ -1,5 +1,18 @@
 import gql from 'graphql-tag'
 
+
+export const GET_MAP = gql`query Mindmap($id: ID!) {
+  Mindmap(id: $id) {
+    id
+    name
+    mdText
+    user {
+      id
+    }
+  }
+}`
+
+
 export const GET_LIST = gql`query allQuestions {
   allMindmaps(orderBy: createdAt_DESC) {
     id

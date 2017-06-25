@@ -4,7 +4,8 @@ import { graphql } from 'react-apollo'
 import { connect } from 'react-redux'
 
 import * as uiActions from '../actions/uiActions'
-import { USER_QUERY } from '../queries'
+import * as graphActions from '../actions/graphActions'
+import { GET_MAP, USER_QUERY } from '../queries'
 
 import Editor from './Editor'
 import GraphContainer from './GraphContainer'
@@ -12,8 +13,13 @@ import SaveDialog from './SaveDialog'
 import ShareDialog from './ShareDialog'
 import Dock from './Dock'
 
-const Home = props => (
-  <section className="section">
+const SavedHome = props => {
+  if(props.data.loading){
+     return <p/>
+  }
+        //props.graphActions.updateEditorDefaultText(props.data.Mindmap.mdText)
+  console.log(props.data.Mindmap.mdText)
+  return (<section className="section">
     <SaveDialog
       userInfo={props.data.user}
       saveDialogOpen={props.ui.saveDialogOpen}
@@ -25,31 +31,45 @@ const Home = props => (
       toggleShareDialog={props.uiActions.toggleShareDialog} />
     <Dock
       userInfo={props.data.user}
+      dataType="mapNodeDataORmyMapsData"
+      useMaps="userMaps"
+      mapNodeData="mapNodeData"
       dockOpen={props.ui.dockOpen}
       toggleDock={props.uiActions.toggleDock}
     />
+
+    <p>{JSON.stringify(props.match)}</p>
+    <p>{JSON.stringify(props.data.Mindmap)}</p>
     <div className="container is-fluid">
       <div className="columns">
         <div className="column is-one-quarter">
-          <Editor/>
+          <Editor mindmap={props.data.Mindmap} />
         </div>
         <div className="column">
           <GraphContainer/>
         </div>
       </div>
     </div>
-  </section>
-)
+  </section>)
+}
 
-//const HomeWithGQLData = graphql(GET_LIST,{name: 'getMindMaps'})(Home)
-const HomeWithUserData = graphql(USER_QUERY,{ options: { fetchPolicy: 'network-only' } })(Home)
+const SavedHomeWithMap = graphql(GET_MAP,{
+ options: (ownProps)=>({
+    variables: {
+	  id: ownProps.match.params.mindmapid
+    }
+  })
+})(SavedHome)
+
+const SavedHomeWithUserData = graphql(USER_QUERY,{ options: { fetchPolicy: 'network-only' } })(SavedHomeWithMap)
 
 const mapStateToProps = state => ( { ui: state.ui });
 
 const mapDispatchToProps = dispatch => (
   {
+    graphActions: bindActionCreators(graphActions, dispatch),
     uiActions: bindActionCreators(uiActions, dispatch)
   }
 );
 
-export default connect( mapStateToProps, mapDispatchToProps)(HomeWithUserData)
+export default connect( mapStateToProps, mapDispatchToProps)(SavedHomeWithUserData)

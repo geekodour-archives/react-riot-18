@@ -13,6 +13,7 @@ import { USER_QUERY } from '../queries'
 
 // components
 import Home from './Home'
+import SavedHome from './SavedHome'
 import NavBar from './NavBar'
 
 const App = props => (
@@ -25,7 +26,7 @@ const App = props => (
       dockOpen={props.ui.dockOpen}
       toggleDock={props.uiActions.toggleDock} />
     <Route exact path="/" component={Home} />
-    <Route exact path="/:mindmapid" component={Home} />
+    <Route exact path="/:mindmapid" component={SavedHome} />
   </div>
   </Router>
 )

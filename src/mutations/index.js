@@ -7,8 +7,8 @@ export const CREATE_USER = gql`mutation ($idToken: String!){
 }`
 
 export const CREATE_MINDMAP = gql`
-  mutation createMindmap($name: String!, $graph: Json!) {
-    createMindmap(name: $name, graph: $graph) {
+  mutation createMindmap($name: String!, $graph: Json!, $mdText: String!) {
+    createMindmap(name: $name, graph: $graph, mdText: $mdText) {
       id
     }
   }

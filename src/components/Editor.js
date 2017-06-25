@@ -1,6 +1,7 @@
 import React from 'react'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
+import { lifecycle } from 'recompose'
 import * as graphActions from '../actions/graphActions'
 import * as uiActions from '../actions/uiActions'
 
@@ -19,13 +20,16 @@ import TextField from 'material-ui/TextField'
 import RaisedButton from 'material-ui/RaisedButton'
 
 const Editor = props => {
+  //
+  //
+  // add modify mutation, call that in handle save when in params page
   const handleSave = () => {
-
     if(props.graph.graphName && props.graph.graph.nodes.length ){
       let graph = genGraph(props.graph.mdText);
       let name = props.graph.graphName;
+      let mdText = props.graph.mdText;
       if(props.data.user){
-        props.createMindMap({variables: { name, graph }})
+        props.createMindMap({variables: { name, graph, mdText }})
           .then((res) => {
             let mindmapsMindmapId = res.data.createMindmap.id;
             let userUserId = props.data.user.id;
@@ -67,6 +71,7 @@ const Editor = props => {
           hintText="Write in markdown"
           multiLine={true}
           rows={10}
+          defaultValue={props.mindmap?props.mindmap.mdText:''}
           errorText={props.graph.editorError}
           onChange={handleEditorChange}
           rowsMax={10}
@@ -103,6 +108,14 @@ const EditorWithMutions = compose(
   }),
   graphql(CREATE_MINDMAP_USER_RELATION,{
     name: 'createMindMapRelation'
+  }),
+  lifecycle({
+    componentDidMount(){
+      if(this.props.mindmap){
+        let graph = genGraph(this.props.mindmap.mdText);
+        this.props.graphActions.updateGraph(this.props.mindmap.mdText,graph);
+      }
+    }
   })
 )(Editor)
 

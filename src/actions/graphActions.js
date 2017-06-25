@@ -16,3 +16,7 @@ export function updateEditorError(errorText) {
 export function updateGraphNameError(errorText) {
   return { type: types.UPDATE_GRAPH_NAME_ERROR, errorText: errorText };
 }
+
+export function updateEditorDefaultText(defaultText) {
+  return { type: types.UPDATE_GRAPH_NAME_ERROR, defaultText: defaultText };
+}
