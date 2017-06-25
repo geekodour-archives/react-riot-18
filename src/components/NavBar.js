@@ -6,8 +6,6 @@ import LoginAuth0 from './LoginAuth0.js'
 
 import AppBar from 'material-ui/AppBar'
 import Paper from 'material-ui/Paper'
-import TextField from 'material-ui/TextField'
-import RaisedButton from 'material-ui/RaisedButton'
 import AutoComplete from 'material-ui/AutoComplete'
 
 const style = {
@@ -53,6 +51,7 @@ const NavBar = props => (
               <Paper style={style} zDepth={1}>
                  <AutoComplete
                   hintText="Search.."
+                  onNewRequest={(map,i)=>(props.searchActions.updateSelectedTerm(i))}
                   dataSource={props.searchResults}
                   onUpdateInput={(term)=>(props.searchActions.searchTerm(term))}
                 />

@@ -17,8 +17,11 @@ export function searchTerm(term) {
               console.error(err);
               return;
             }
-            let restults = content.hits.map(hit=>hit.name)
-            dispatch({ type: types.UPDATE_SEARCH_RESULTS, results: restults });
+            dispatch({ type: types.UPDATE_SEARCH_RESULTS, results: content.hits });
         });
   };
+}
+
+export function updateSelectedTerm(index) {
+  return { type: types.UPDATE_SELECTED_TERM, index: index  };
 }

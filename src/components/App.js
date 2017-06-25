@@ -25,6 +25,7 @@ const App = props => (
       dockOpen={props.ui.dockOpen}
       toggleDock={props.uiActions.toggleDock} />
     <Route exact path="/" component={Home} />
+    <Route exact path="/:mindmapid" component={Home} />
   </div>
   </Router>
 )
@@ -42,7 +43,3 @@ const mapDispatchToProps = dispatch => (
 );
 
 export default connect( mapStateToProps, mapDispatchToProps)(AppWithGQLData)
-//export default connect( mapStateToProps, mapDispatchToProps)(App)
-
-
-//export default App;
