@@ -16,10 +16,6 @@ const style = {
   paddingRight: '15px'
 };
 
-const _logout = () => {
-window.localStorage.removeItem('auth0IdToken')
-}
-
 const NavBar = props => (
   <div className="">
   <MediaQuery maxDeviceWidth={800}>
@@ -42,7 +38,6 @@ const NavBar = props => (
           <span></span>
         </span>
         <div className="nav-right nav-menu">
-          <a className="nav-item is-tab" onClick={()=>(_logout())}>Log out</a>
           <LoginAuth0/>
         </div>
       </div>
