@@ -3531,10 +3531,10 @@ card {
   stroke-width: 2px; }
 
 .node text {
-  fill: #888888;
+  fill: #000;
   stroke: none;
-  font-size: .6em; }
+  font-size: 1em; }
 
 .link {
-  stroke: #cccccc;
+  stroke: #000;
   stroke-opacity: .6; }

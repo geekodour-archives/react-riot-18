@@ -9,7 +9,7 @@ const ShareDialog = props => {
     modal={false}
     open={props.shareDialogOpen}
     onRequestClose={props.toggleShareDialog}>
-    Share url from here
+    Share this url <pre>{`http://sentry-aaron-10753.netlify.com/${props.params.mindmapid}`}</pre>
   </Dialog>
   )
   }

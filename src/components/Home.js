@@ -35,7 +35,7 @@ const Home = props => (
           <Editor/>
         </div>
         <div className="column">
-          <GraphContainer2 nodes={[{key:"Hello",size:"7"},{key:"What's up!",size:"5"}]} links={[{source:0,target:1,key:"0,1",size:"2"}]} />
+          <GraphContainer2 nodes={[{key:"Hello",size:"7"},{key:"What's up!",size:"5"},{key:"W up!",size:"9"}]} links={[{source:0,target:1,key:"0,1",size:"2"},{source:0,target:2,key:"0,2",size:"2"}]} />
         </div>
       </div>
     </div>
