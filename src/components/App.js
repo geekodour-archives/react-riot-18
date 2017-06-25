@@ -6,6 +6,7 @@ import { graphql } from 'react-apollo'
 
 // actions
 import * as uiActions from '../actions/uiActions'
+import * as searchActions from '../actions/searchActions'
 
 // graphql
 import { USER_QUERY } from '../queries'
@@ -19,6 +20,8 @@ const App = props => (
   <div>
     <NavBar
       userInfo={props.data.user}
+      searchResults={props.search.results}
+      searchActions={props.searchActions}
       dockOpen={props.ui.dockOpen}
       toggleDock={props.uiActions.toggleDock} />
     <Route exact path="/" component={Home} />
@@ -29,11 +32,12 @@ const App = props => (
 // needed for proper check on user auth
 const AppWithGQLData = graphql(USER_QUERY,{ options: { fetchPolicy: 'network-only' } })(App)
 
-const mapStateToProps = state => ( { ui: state.ui });
+const mapStateToProps = state => ( { ui: state.ui, search: state.search });
 
 const mapDispatchToProps = dispatch => (
   {
-    uiActions: bindActionCreators(uiActions, dispatch)
+    uiActions: bindActionCreators(uiActions, dispatch),
+    searchActions: bindActionCreators(searchActions, dispatch)
   }
 );
 

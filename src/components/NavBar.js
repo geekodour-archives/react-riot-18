@@ -8,6 +8,7 @@ import AppBar from 'material-ui/AppBar'
 import Paper from 'material-ui/Paper'
 import TextField from 'material-ui/TextField'
 import RaisedButton from 'material-ui/RaisedButton'
+import AutoComplete from 'material-ui/AutoComplete'
 
 const style = {
   textAlign: 'center',
@@ -50,7 +51,11 @@ const NavBar = props => (
         <div className="nav-right">
            <a className="nav-item">
               <Paper style={style} zDepth={1}>
-                <TextField hintText="search" />
+                 <AutoComplete
+                  hintText="Search.."
+                  dataSource={props.searchResults}
+                  onUpdateInput={(term)=>(props.searchActions.searchTerm(term))}
+                />
 		      </Paper>
            </a>
         </div>

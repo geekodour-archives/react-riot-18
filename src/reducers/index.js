@@ -6,6 +6,7 @@ import { ApolloClient, createNetworkInterface } from 'react-apollo'
 import ui from './uiReducer'
 import graph from './graphReducer'
 import auth from './authReducer'
+import search from './searchReducer'
 
 
 // setup apollo redux client
@@ -32,6 +33,7 @@ export default combineReducers({
   ui,
   graph,
   auth,
+  search,
   routing: routerReducer,
   apollo: client.reducer()
 })
