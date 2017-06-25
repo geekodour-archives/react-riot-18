@@ -1,9 +1,11 @@
-import { UPDATE_GRAPH, UPDATE_GRAPH_NAME } from '../constants/actionTypes'
+import { UPDATE_GRAPH, UPDATE_GRAPH_NAME, UPDATE_EDITOR_ERROR, UPDATE_GRAPH_NAME_ERROR } from '../constants/actionTypes'
 
 const initialState = {
         mdText : '',
         graphName: '',
-        graph: {}
+        graph: {nodes:[],edges:[]},
+        editorError: '',
+        graphNameError: ''
 };
 
 
@@ -20,6 +22,18 @@ export default function graphReducer(state = initialState, action) {
           return {
             ...state,
             graphName: action.name
+          }
+
+    case UPDATE_EDITOR_ERROR:
+          return {
+            ...state,
+            editorError: action.errorText
+          }
+
+    case UPDATE_GRAPH_NAME_ERROR:
+          return {
+            ...state,
+            graphNameError: action.errorText
           }
 
     default:

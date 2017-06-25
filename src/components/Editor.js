@@ -20,27 +20,42 @@ import RaisedButton from 'material-ui/RaisedButton'
 
 const Editor = props => {
   const handleSave = () => {
-    // check if new or old mindmap create and update accordingly
-    // check if graph and names are valid: todo
-    // do error if name or editor field is empty
-    let graph = genGraph(props.graph.mdText);
-    let name = props.graph.graphName;
-    if(props.data.user){
-      props.createMindMap({variables: { name, graph }})
-        .then((res) => {
-          let mindmapsMindmapId = res.data.createMindmap.id;
-          let userUserId = props.data.user.id;
-          props.createMindMapRelation({variables: {userUserId, mindmapsMindmapId}})
-        })
+
+    if(props.graph.graphName && props.graph.graph.nodes.length ){
+      let graph = genGraph(props.graph.mdText);
+      let name = props.graph.graphName;
+      if(props.data.user){
+        props.createMindMap({variables: { name, graph }})
+          .then((res) => {
+            let mindmapsMindmapId = res.data.createMindmap.id;
+            let userUserId = props.data.user.id;
+            props.createMindMapRelation({variables: {userUserId, mindmapsMindmapId}})
+          })
+      }
+      props.uiActions.toggleSaveDialog();
     }
-    props.uiActions.toggleSaveDialog();
+    else {
+      if(!props.graph.graphName){
+        props.graphActions.updateGraphNameError(`Please give a name to save`);
+      }
+      if(!props.graph.graph.nodes.length){
+        props.graphActions.updateEditorError(`Something is wrong with the markdown`);
+      }
+    }
   }
 
   const handleEditorChange = (o,mdText) => {
-    let graph = genGraph(mdText);
-    props.graphActions.updateGraph(mdText,graph);
+    try{
+      let graph = genGraph(mdText);
+      props.graphActions.updateEditorError('');
+      props.graphActions.updateGraph(mdText,graph);
+    }
+    catch(err){
+      props.graphActions.updateEditorError('Wrong syntax');
+    }
   }
   const handleNameChange = (o,name) => {
+    props.graphActions.updateGraphNameError(``);
     props.graphActions.updateGraphName(name);
   }
 
@@ -52,11 +67,13 @@ const Editor = props => {
           hintText="Write in markdown"
           multiLine={true}
           rows={10}
+          errorText={props.graph.editorError}
           onChange={handleEditorChange}
           rowsMax={10}
         />
         <TextField
           onChange={handleNameChange}
+          errorText={props.graph.graphNameError}
           hintText="Name" />
       </CardText>
       <CardActions>

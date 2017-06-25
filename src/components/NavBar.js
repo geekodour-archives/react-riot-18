@@ -40,7 +40,7 @@ const NavBar = props => (
         <div className="nav-right nav-menu">
           <LoginAuth0/>
           {props.userInfo
-           ?<a className="nav-item is-tab">MyMaps</a>
+           ?<a className="nav-item is-tab" onClick={props.toggleDock}>MyMaps</a>
            :<p/>}
         </div>
       </div>
@@ -51,10 +51,6 @@ const NavBar = props => (
            <a className="nav-item">
               <Paper style={style} zDepth={1}>
                 <TextField hintText="search" />
-                  <RaisedButton
-                    label="Open Drawer"
-                    onTouchTap={props.toggleDock}
-                  />
 		      </Paper>
            </a>
         </div>

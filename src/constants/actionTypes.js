@@ -7,3 +7,5 @@ export const TOGGLE_DOCK = 'TOGGLE_DOCK';
 // graph actionTypes
 export const UPDATE_GRAPH = 'UPDATE_GRAPH';
 export const UPDATE_GRAPH_NAME = 'UPDATE_GRAPH_NAME';
+export const UPDATE_EDITOR_ERROR = 'UPDATE_EDITOR_ERROR';
+export const UPDATE_GRAPH_NAME_ERROR = 'UPDATE_GRAPH_NAME_ERROR';

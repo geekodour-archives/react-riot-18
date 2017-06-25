@@ -8,9 +8,6 @@ const GraphContainer = props => (
   <Card style={{height: '500px'}}>
       <CardHeader title="Graph Display" />
       <CardText>
-        stuff
-        <p>{props.graph.mdText}</p>
-        <pre>{JSON.stringify(props.graph.graph)}</pre>
         <MindMap
         style={{height: '500px'}}
         nodes={props.graph.graph.nodes}

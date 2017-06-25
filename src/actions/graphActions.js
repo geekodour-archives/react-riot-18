@@ -8,3 +8,11 @@ export function updateGraph(mdText,graph) {
 export function updateGraphName(name) {
   return { type: types.UPDATE_GRAPH_NAME, name: name };
 }
+
+export function updateEditorError(errorText) {
+  return { type: types.UPDATE_EDITOR_ERROR, errorText: errorText };
+}
+
+export function updateGraphNameError(errorText) {
+  return { type: types.UPDATE_GRAPH_NAME_ERROR, errorText: errorText };
+}

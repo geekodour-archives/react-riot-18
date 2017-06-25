@@ -14,7 +14,6 @@ import Dock from './Dock'
 
 const Home = props => (
   <section className="section">
-    <p>{JSON.stringify(props.data)}</p>
     <SaveDialog
       userInfo={props.data.user}
       saveDialogOpen={props.ui.saveDialogOpen}
