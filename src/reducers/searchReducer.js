@@ -2,7 +2,7 @@ import { UPDATE_SEARCH_RESULTS, UPDATE_SELECTED_TERM } from '../constants/action
 
 const initialState = {
         results: [],
-        actualRestults: [],
+        actualResults: [],
         selectedMap: {}
 };
 
@@ -13,7 +13,7 @@ export default function graphReducer(state = initialState, action) {
           return {
             ...state,
             results: action.results.map(hit=>hit.name),
-            actualRestults : action.results
+            actualResults : action.results
           }
 
     case UPDATE_SELECTED_TERM:

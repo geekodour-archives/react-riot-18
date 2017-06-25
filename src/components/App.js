@@ -22,6 +22,7 @@ const App = props => (
     <NavBar
       userInfo={props.data.user}
       searchResults={props.search.results}
+      searchActualResults={props.search.actualResults}
       searchActions={props.searchActions}
       dockOpen={props.ui.dockOpen}
       toggleDock={props.uiActions.toggleDock} />

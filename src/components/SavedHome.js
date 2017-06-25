@@ -17,8 +17,6 @@ const SavedHome = props => {
   if(props.data.loading){
      return <p/>
   }
-        //props.graphActions.updateEditorDefaultText(props.data.Mindmap.mdText)
-  console.log(props.data.Mindmap.mdText)
   return (<section className="section">
     <SaveDialog
       userInfo={props.data.user}
@@ -38,8 +36,6 @@ const SavedHome = props => {
       toggleDock={props.uiActions.toggleDock}
     />
 
-    <p>{JSON.stringify(props.match)}</p>
-    <p>{JSON.stringify(props.data.Mindmap)}</p>
     <div className="container is-fluid">
       <div className="columns">
         <div className="column is-one-quarter">
