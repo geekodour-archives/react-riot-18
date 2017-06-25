@@ -8,6 +8,7 @@ import { USER_QUERY } from '../queries'
 
 import Editor from './Editor'
 import GraphContainer from './GraphContainer'
+import GraphContainer2 from './GraphContainer2'
 import SaveDialog from './SaveDialog'
 import ShareDialog from './ShareDialog'
 import Dock from './Dock'
@@ -34,7 +35,7 @@ const Home = props => (
           <Editor/>
         </div>
         <div className="column">
-          <GraphContainer/>
+          <GraphContainer2 nodes={[{key:"Hello",size:"7"},{key:"What's up!",size:"5"}]} links={[{source:0,target:1,key:"0,1",size:"2"}]} />
         </div>
       </div>
     </div>

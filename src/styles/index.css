@@ -3524,3 +3524,17 @@ card {
 
 .mindmap-svg {
   height: 300px; }
+
+.node circle {
+  fill: #888888;
+  stroke: #fff;
+  stroke-width: 2px; }
+
+.node text {
+  fill: #888888;
+  stroke: none;
+  font-size: .6em; }
+
+.link {
+  stroke: #cccccc;
+  stroke-opacity: .6; }

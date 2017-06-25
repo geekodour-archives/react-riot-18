@@ -6,6 +6,7 @@
     "algoliasearch": "3.24.0",
     "auth0-lock": "10.18.0",
     "bulma": "0.4.2",
+    "d3": "3.5.17",
     "graphql-tag": "2.4.2",
     "marked": "0.3.6",
     "material-ui": "0.18.3",
