@@ -1,7 +1,10 @@
 import * as types from '../constants/actionTypes';
-import {genGraph} from '../utils'
+//import {genGraph} from '../utils'
 
-export function parseMd(mdText) {
-  let graph = genGraph(mdText);
-  return { type: types.PARSE_MD, mdText: mdText, graph: graph  };
+export function updateGraph(mdText,graph) {
+  return { type: types.UPDATE_GRAPH, mdText: mdText, graph: graph  };
+}
+
+export function updateGraphName(name) {
+  return { type: types.UPDATE_GRAPH_NAME, name: name };
 }

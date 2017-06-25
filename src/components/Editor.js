@@ -6,33 +6,63 @@ import * as uiActions from '../actions/uiActions'
 
 
 // graphql
-import { graphql } from 'react-apollo'
+import { graphql, compose } from 'react-apollo'
 import { USER_QUERY } from '../queries'
-import { CREATE_MINDMAP } from '../mutations'
+import { CREATE_MINDMAP, CREATE_MINDMAP_USER_RELATION } from '../mutations'
+
+// cool stuff, this should be in the action creator file but design choices!
+import {genGraph} from '../utils'
 
 
 import {Card, CardActions, CardHeader, CardText} from 'material-ui/Card'
 import TextField from 'material-ui/TextField'
 import RaisedButton from 'material-ui/RaisedButton'
 
-const Editor = props => (
+const Editor = props => {
+  const handleSave = () => {
+    // check if new or old mindmap create and update accordingly
+    // check if graph and names are valid: todo
+    // do error if name or editor field is empty
+    let graph = genGraph(props.graph.mdText);
+    let name = props.graph.graphName;
+    if(props.data.user){
+      props.createMindMap({variables: { name, graph }})
+        .then((res) => {
+          let mindmapsMindmapId = res.data.createMindmap.id;
+          let userUserId = props.data.user.id;
+          props.createMindMapRelation({variables: {userUserId, mindmapsMindmapId}})
+        })
+    }
+    props.uiActions.toggleSaveDialog();
+  }
+
+  const handleEditorChange = (o,mdText) => {
+    let graph = genGraph(mdText);
+    props.graphActions.updateGraph(mdText,graph);
+  }
+  const handleNameChange = (o,name) => {
+    props.graphActions.updateGraphName(name);
+  }
+
+  return(
   <Card>
-      <CardHeader title="Markdown Editor" />
+      <CardHeader title={props.graph.graphName}/>
       <CardText>
-        <TextField hintText="Name" />
         <TextField
           hintText="Write in markdown"
           multiLine={true}
           rows={10}
-          onChange={(o,n)=>{console.log(n);props.graphActions.parseMd(n)}}
+          onChange={handleEditorChange}
           rowsMax={10}
         />
+        <TextField
+          onChange={handleNameChange}
+          hintText="Name" />
       </CardText>
       <CardActions>
-        <p>{JSON.stringify(props.data.user)}</p>
         <RaisedButton
           label="save"
-          onTouchTap={props.uiActions.toggleSaveDialog}
+          onTouchTap={handleSave}
           backgroundColor='#494949'
           labelColor='#FFF'/>
         <RaisedButton
@@ -42,23 +72,24 @@ const Editor = props => (
           labelColor='#FFF'/>
       </CardActions>
     </Card>
-)
+  )
+}
 
-const EditorWithCreateMindmap = graphql(CREATE_MINDMAP,{
-  props: ({ownProps, mutate}) => ({
-    createMindMap: ({ name, graph }) => {
-      return (
-        mutate({
-          variables: { name, graph }
-        })
-      )
-    }
+
+
+const EditorWithMutions = compose(
+  graphql(USER_QUERY,{
+    options: { fetchPolicy: 'network-only' }
+  }),
+  graphql(CREATE_MINDMAP,{
+    name: 'createMindMap'
+  }),
+  graphql(CREATE_MINDMAP_USER_RELATION,{
+    name: 'createMindMapRelation'
   })
-})(Editor);
+)(Editor)
 
-const EditorWithUserData = graphql(USER_QUERY,{ options: { fetchPolicy: 'network-only' } })(EditorWithCreateMindmap)
-
-const mapStateToProps = state => ({ auth: state.apollo });
+const mapStateToProps = state => ({ graph: state.graph });
 const mapDispatchToProps = dispatch => (
   {
     graphActions: bindActionCreators(graphActions, dispatch),
@@ -66,5 +97,4 @@ const mapDispatchToProps = dispatch => (
   }
 );
 
-//export default connect( mapStateToProps, mapDispatchToProps)(Editor)
-export default connect( mapStateToProps, mapDispatchToProps)(EditorWithUserData)
+export default connect( mapStateToProps, mapDispatchToProps)(EditorWithMutions)

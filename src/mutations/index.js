@@ -13,3 +13,12 @@ export const CREATE_MINDMAP = gql`
     }
   }
 `
+export const CREATE_MINDMAP_USER_RELATION = gql`
+  mutation addToUserOnMindmap($userUserId: ID!, $mindmapsMindmapId: ID!) {
+    addToUserOnMindmap(userUserId: $userUserId, mindmapsMindmapId: $mindmapsMindmapId) {
+      userUser {
+        id
+      }
+    }
+  }
+`
