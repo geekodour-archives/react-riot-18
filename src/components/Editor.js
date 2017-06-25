@@ -68,19 +68,20 @@ const Editor = props => {
 
   return(
   <Card>
-      <CardHeader title={props.graph.graphName}/>
+      <CardHeader title={<p>{props.graph.graphName}</p>}/>
       <CardText>
         <TextField
           hintText="Write in markdown"
           multiLine={true}
           rows={10}
-          defaultValue={props.mindmap?props.mindmap.mdText:''}
+          defaultValue={props.mindmap?props.mindmap.mdText:'# Hello! hit Enter!'}
           errorText={props.graph.editorError}
           onChange={handleEditorChange}
           rowsMax={10}
         />
         <TextField
           onChange={handleNameChange}
+          defaultValue={props.mindmap?props.mindmap.name:''}
           errorText={props.graph.graphNameError}
           hintText="Name" />
       </CardText>
@@ -125,7 +126,9 @@ const EditorWithMutions = compose(
     componentDidMount(){
       if(this.props.mindmap){
         let graph = genGraph(this.props.mindmap.mdText);
+        let graphName = this.props.mindmap.name;
         this.props.graphActions.updateGraph(this.props.mindmap.mdText,graph);
+        this.props.graphActions.updateGraphName(graphName);
       }
     }
   })

@@ -51,11 +51,14 @@ const NavBar = (props) => {
       </nav>
       <nav className="nav" style={{backgroundColor:'#87c8f4'}}>
         <div className="container">
+          <div className="nav-left">
+            <p className="nav-item">Write markdown, get mindmaps!</p>
+          </div>
           <div className="nav-right">
              <a className="nav-item">
                 <Paper style={style} zDepth={1}>
                    <AutoComplete
-                    hintText="Search.."
+                    hintText="Search names or ids"
                     onNewRequest={handleSearchRedirect}
                     dataSource={props.searchResults}
                     onUpdateInput={(term)=>(props.searchActions.searchTerm(term))}

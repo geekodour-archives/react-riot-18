@@ -2,14 +2,13 @@ import React, {Component} from 'react'
 import { findDOMNode } from 'react-dom'
 import { connect } from 'react-redux'
 //import MindMap from 'react-mindmap'
-import { lifecycle } from 'recompose'
 import d3 from 'd3'
 
-import {Card, CardHeader, CardText} from 'material-ui/Card'
+import {Card, CardText} from 'material-ui/Card'
 
 const width = 700;
 const height = 400;
-const barHeight = 50;
+const barHeight = 30;
 const force = d3.layout.force()
   .charge((d)=>{let charge = -100; if(d.depth === 1 ) charge = 10*charge; return charge})
   .gravity(0.3)
@@ -21,7 +20,7 @@ const enterNode = (selection) => {
   selection.classed('node', true);
   selection.append('rect')
     .attr("height", barHeight)
-    .attr("width", 80)
+    .attr("width", 100)
     .attr("fill", (d) => d.color)
     .attr("transform", (d)=>`translate(${height * d},0)`)
     .call(force.drag);
@@ -83,7 +82,6 @@ class GraphContainer extends Component {
   render(){
     return (
     <Card style={{height: '500px'}}>
-        <CardHeader title="Graph Display" />
         <CardText>
           <svg width={width} height={height}>
               <g ref='graph' />

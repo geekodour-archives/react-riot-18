@@ -13,11 +13,10 @@ export const GET_MAP = gql`query Mindmap($id: ID!) {
 }`
 
 
-export const GET_LIST = gql`query allQuestions {
-  allMindmaps(orderBy: createdAt_DESC) {
+export const GET_USER_MAPS = gql`query allMindmaps($id: ID!) {
+  allMindmaps(filter: {user: {id: $id} }) {
     id
     name
-    graph
   }
 }`;
 
