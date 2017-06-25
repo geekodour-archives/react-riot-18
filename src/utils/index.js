@@ -5,15 +5,18 @@ export const genGraph = src => {
   let d3Graph = {nodes:[],edges:[]};
 
   let headNode = { depth: 0, head: null };
-
-  tokens.forEach(token=>{
+  let headingsCount = 0;
+  const colors = ["#e53935","#8bc34a","#ce93d8","#2196f3","#f57f17","#607d8b","#ff5722","#a7ffeb"];
+  tokens.forEach((token,i)=>{
     switch (token.type) {
       case 'heading':
 
-        let currentNode = { name : token.text, depth : token.depth };
+        let currentNode = { name : token.text, depth : token.depth, index: headingsCount, color: colors[token.depth-1] };
+        headingsCount += 1;
+
 
         // add to the nodes array
-        d3Graph.nodes.push({id:currentNode.name,text:currentNode.name,tokens:[]})
+        d3Graph.nodes.push({key:currentNode.name,tokens:[],index:currentNode.index,color:currentNode.color,depth: currentNode.depth});
 
         if (currentNode.depth > headNode.depth) {
 
@@ -28,7 +31,7 @@ export const genGraph = src => {
 
           // add to the edges array
           if(headNode.head.parent){
-            d3Graph.edges.push({target:currentNode.name,source:headNode.head.parent.name,curve:{}})
+                  d3Graph.edges.push({ target:currentNode.index, source:headNode.head.parent.index, key:`${headNode.head.parent.index},${currentNode.index}`, size: `2` });
           }
         }
         else {
@@ -40,7 +43,12 @@ export const genGraph = src => {
 
           // add to the edges array
           if(headNode.head.parent){
-            d3Graph.edges.push({target:currentNode.name,source:headNode.head.parent.name,curve:{}})
+                  d3Graph.edges.push({
+                          target:currentNode.index,
+                          source:headNode.head.parent.index,
+                          key:`${headNode.head.parent.index},${currentNode.index}`,
+                          size: `2`
+                  })
           }
 
           currentNode = Object.assign(currentNode,{parent:headNode.head.parent});

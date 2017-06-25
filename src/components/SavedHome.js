@@ -10,6 +10,7 @@ import { GET_MAP, USER_QUERY } from '../queries'
 import Editor from './Editor'
 import GraphContainer from './GraphContainer'
 import SaveDialog from './SaveDialog'
+import HelpDialog from './HelpDialog'
 import ShareDialog from './ShareDialog'
 import Dock from './Dock'
 
@@ -21,12 +22,16 @@ const SavedHome = props => {
     <SaveDialog
       userInfo={props.data.user}
       saveDialogOpen={props.ui.saveDialogOpen}
+      params={props.match.params}
       toggleSaveDialog={props.uiActions.toggleSaveDialog} />
     <ShareDialog
       userInfo={props.data.user}
       params={props.match.params}
       shareDialogOpen={props.ui.shareDialogOpen}
       toggleShareDialog={props.uiActions.toggleShareDialog} />
+    <HelpDialog
+      helpDialogOpen={props.ui.helpDialogOpen}
+      toggleHelpDialog={props.uiActions.toggleHelpDialog} />
     <Dock
       userInfo={props.data.user}
       dataType="mapNodeDataORmyMapsData"
@@ -42,7 +47,7 @@ const SavedHome = props => {
           <Editor mindmap={props.data.Mindmap} />
         </div>
         <div className="column">
-          <GraphContainer/>
+          <GraphContainer nodes={props.graph.graph.nodes} links={props.graph.graph.edges}/>
         </div>
       </div>
     </div>
@@ -59,7 +64,7 @@ const SavedHomeWithMap = graphql(GET_MAP,{
 
 const SavedHomeWithUserData = graphql(USER_QUERY,{ options: { fetchPolicy: 'network-only' } })(SavedHomeWithMap)
 
-const mapStateToProps = state => ( { ui: state.ui });
+const mapStateToProps = state => ( { ui: state.ui, graph: state.graph });
 
 const mapDispatchToProps = dispatch => (
   {

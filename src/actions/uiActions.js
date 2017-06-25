@@ -13,6 +13,10 @@ export function toggleShareDialog() {
   return { type: types.TOGGLE_SHARE_DIALOG };
 }
 
+export function toggleHelpDialog() {
+  return { type: types.TOGGLE_HELP_DIALOG };
+}
+
 export function toggleDock() {
   return { type: types.TOGGLE_DOCK };
 }

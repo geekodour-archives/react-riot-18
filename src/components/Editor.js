@@ -1,5 +1,6 @@
 import React from 'react'
 import { bindActionCreators } from 'redux'
+import { withRouter } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { lifecycle } from 'recompose'
 import * as graphActions from '../actions/graphActions'
@@ -20,20 +21,22 @@ import TextField from 'material-ui/TextField'
 import RaisedButton from 'material-ui/RaisedButton'
 
 const Editor = props => {
-  //
-  //
   // add modify mutation, call that in handle save when in params page
+  //
   const handleSave = () => {
     if(props.graph.graphName && props.graph.graph.nodes.length ){
       let graph = genGraph(props.graph.mdText);
       let name = props.graph.graphName;
       let mdText = props.graph.mdText;
-      if(props.data.user){
+      if(props.data.user && !props.mindmap){
         props.createMindMap({variables: { name, graph, mdText }})
           .then((res) => {
             let mindmapsMindmapId = res.data.createMindmap.id;
             let userUserId = props.data.user.id;
             props.createMindMapRelation({variables: {userUserId, mindmapsMindmapId}})
+                 .then((res)=>{
+                    props.history.push(`/${mindmapsMindmapId}`);
+                 })
           })
       }
       props.uiActions.toggleSaveDialog();
@@ -82,16 +85,25 @@ const Editor = props => {
           hintText="Name" />
       </CardText>
       <CardActions>
+        <div className="has-text-centered">
         <RaisedButton
           label="save"
+          style={{marginRight:"0.2em"}}
           onTouchTap={handleSave}
           backgroundColor='#494949'
           labelColor='#FFF'/>
         <RaisedButton
           label="share"
+          style={{marginRight:"0.2em"}}
           onTouchTap={props.uiActions.toggleShareDialog}
           backgroundColor='#494949'
           labelColor='#FFF'/>
+        <RaisedButton
+          label="help"
+          onTouchTap={props.uiActions.toggleHelpDialog}
+          backgroundColor='#494949'
+          labelColor='#FFF'/>
+        </div>
       </CardActions>
     </Card>
   )
@@ -127,4 +139,4 @@ const mapDispatchToProps = dispatch => (
   }
 );
 
-export default connect( mapStateToProps, mapDispatchToProps)(EditorWithMutions)
+export default connect( mapStateToProps, mapDispatchToProps)(withRouter(EditorWithMutions))

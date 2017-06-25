@@ -5,7 +5,7 @@ const ShareDialog = props => {
   if(props.params.mindmapid){
   return (
   <Dialog
-    title="Share MindMap"
+    title="Share this MindMap"
     modal={false}
     open={props.shareDialogOpen}
     onRequestClose={props.toggleShareDialog}>
@@ -19,7 +19,6 @@ const ShareDialog = props => {
     modal={false}
     open={props.shareDialogOpen}
     onRequestClose={props.toggleShareDialog}>
-    Share url from here
   </Dialog>
   )
 }

@@ -8,9 +8,9 @@ import { USER_QUERY } from '../queries'
 
 import Editor from './Editor'
 import GraphContainer from './GraphContainer'
-import GraphContainer2 from './GraphContainer2'
 import SaveDialog from './SaveDialog'
 import ShareDialog from './ShareDialog'
+import HelpDialog from './HelpDialog'
 import Dock from './Dock'
 
 const Home = props => (
@@ -18,12 +18,16 @@ const Home = props => (
     <SaveDialog
       userInfo={props.data.user}
       saveDialogOpen={props.ui.saveDialogOpen}
+      params={props.match.params}
       toggleSaveDialog={props.uiActions.toggleSaveDialog} />
     <ShareDialog
       userInfo={props.data.user}
       params={props.match.params}
       shareDialogOpen={props.ui.shareDialogOpen}
       toggleShareDialog={props.uiActions.toggleShareDialog} />
+    <HelpDialog
+      helpDialogOpen={props.ui.helpDialogOpen}
+      toggleHelpDialog={props.uiActions.toggleHelpDialog} />
     <Dock
       userInfo={props.data.user}
       dockOpen={props.ui.dockOpen}
@@ -35,7 +39,7 @@ const Home = props => (
           <Editor/>
         </div>
         <div className="column">
-          <GraphContainer2 nodes={[{key:"Hello",size:"7"},{key:"What's up!",size:"5"},{key:"W up!",size:"9"}]} links={[{source:0,target:1,key:"0,1",size:"2"},{source:0,target:2,key:"0,2",size:"2"}]} />
+                <GraphContainer nodes={props.graph.graph.nodes} links={props.graph.graph.edges}/>
         </div>
       </div>
     </div>
@@ -45,7 +49,7 @@ const Home = props => (
 //const HomeWithGQLData = graphql(GET_LIST,{name: 'getMindMaps'})(Home)
 const HomeWithUserData = graphql(USER_QUERY,{ options: { fetchPolicy: 'network-only' } })(Home)
 
-const mapStateToProps = state => ( { ui: state.ui });
+const mapStateToProps = state => ( { ui: state.ui, graph: state.graph });
 
 const mapDispatchToProps = dispatch => (
   {

@@ -2,6 +2,7 @@
 export const DIM_TOGGLE = 'DIM_TOGGLE';
 export const TOGGLE_SAVE_DIALOG = 'TOGGLE_SAVE_DIALOG';
 export const TOGGLE_SHARE_DIALOG = 'TOGGLE_SHARE_DIALOG';
+export const TOGGLE_HELP_DIALOG = 'TOGGLE_HELP_DIALOG';
 export const TOGGLE_DOCK = 'TOGGLE_DOCK';
 
 // graph actionTypes

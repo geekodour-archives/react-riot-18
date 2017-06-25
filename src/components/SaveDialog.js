@@ -2,26 +2,34 @@ import React from 'react'
 import Dialog from 'material-ui/Dialog'
 
 const SaveDialog = props => {
-  if(props.userInfo){
+  if(props.params.mindmapid){
     return (
     <Dialog
-      title="Save MindMap"
+      title="Sorry! don't have modification mutation yet!"
       modal={false}
       open={props.saveDialogOpen}
       onRequestClose={props.toggleSaveDialog}>
-      <p>{JSON.stringify(props)}</p>
-      Save stuff here
     </Dialog>
     )
   }
+
+  if(props.userInfo){
+    return (
+    <Dialog
+      title="Saved!"
+      modal={false}
+      open={props.saveDialogOpen}
+      onRequestClose={props.toggleSaveDialog}>
+    </Dialog>
+    )
+  }
+
   return(
     <Dialog
       title="Need to be logged in!"
       modal={false}
       open={props.saveDialogOpen}
       onRequestClose={props.toggleSaveDialog}>
-      <p>{JSON.stringify(props)}</p>
-      Save stuff here
     </Dialog>
     )
 }

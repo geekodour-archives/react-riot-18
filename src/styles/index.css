@@ -3538,3 +3538,7 @@ card {
 .link {
   stroke: #000;
   stroke-opacity: .6; }
+
+pre {
+  white-space: pre-wrap;
+  word-wrap: break-word; }
