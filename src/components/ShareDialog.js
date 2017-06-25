@@ -2,7 +2,7 @@ import React from 'react'
 import Dialog from 'material-ui/Dialog'
 
 const ShareDialog = props => {
-  if(props.userInfo){
+  if(props.params.mindmapid){
   return (
   <Dialog
     title="Share MindMap"
@@ -15,7 +15,7 @@ const ShareDialog = props => {
   }
   return (
   <Dialog
-    title="Need to be logged in to share"
+    title="Only saved maps can be shared, please save first"
     modal={false}
     open={props.shareDialogOpen}
     onRequestClose={props.toggleShareDialog}>

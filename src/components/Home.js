@@ -20,6 +20,7 @@ const Home = props => (
       toggleSaveDialog={props.uiActions.toggleSaveDialog} />
     <ShareDialog
       userInfo={props.data.user}
+      params={props.match.params}
       shareDialogOpen={props.ui.shareDialogOpen}
       toggleShareDialog={props.uiActions.toggleShareDialog} />
     <Dock
@@ -28,6 +29,7 @@ const Home = props => (
       toggleDock={props.uiActions.toggleDock}
     />
 
+        <p>{JSON.stringify(props.match)}</p>
     <div className="container is-fluid">
       <div className="columns">
         <div className="column is-one-quarter">
